@@ -1,4 +1,4 @@
-box: wercker/golang
+box: golang
 # Add services here
 # Build definition
 build:
