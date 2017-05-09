@@ -34,15 +34,7 @@ deploy:
         repository: tspeech/testpipeline
         tag: latest
         username: $DOCKER_USERNAME
-    - 
-      cng/cf-deploy: 
-        api: $API
-        appname: wercker-step-hello
-        docker_image: bobwongvouse/pipelineTest
-        org: $ORG
-        password: $PASSWORD
-        space: $SPACE
-        user: $USER
+
 dev: 
   steps: 
     - 
