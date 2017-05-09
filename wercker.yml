@@ -6,9 +6,9 @@ build:
       setup-go-workspace: 
         package-dir: github.com/bobwongvouse/pipelineTest
     - 
-      code: env
-      name: env
-      script: ~
+      script:
+        code: env
+        name: env
     - 
       script: 
         code: |
