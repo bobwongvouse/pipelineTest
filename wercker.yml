@@ -26,8 +26,7 @@ build:
 deploy: 
   steps: 
     - 
-      internal/docker-push: 
-        cmd: /pipeline/source/main
+      internal/docker-push:
         password: $DOCKER_PASSWORD
         port: "8080"
         registry: "https://registry.hub.docker.com"
