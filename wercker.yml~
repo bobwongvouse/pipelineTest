@@ -1,29 +1,58 @@
-box: wercker/golang
-# Add services here
+box: golang
+
+dev:
+        steps:
+                -setup-go-workspace:
+                        package-dir: github.com/bobwongvouse/pipelineTest
+
+                -script:
+                        name: env
+                        code: env
+                
+                -script:
+                        name: go get
+                        code: |
+                                cd $WERCKER_SOURCE_DIR
+                                go version
+                                go get -u github.com/Masterminds/glide
+                        export PATH=$WERCKER_SOURCE_DIR/bin:$PATH
+                        glide install
+               
+                -internal/watch:
+                        code: go run main.go
+                        reload: true
+                                
 # Build definition
 build:
-  # The steps that will be executed on build
-  steps:
-    # Sets the go workspace and places you package
-    # at the right place in the workspace tree
-    - setup-go-workspace
+        # The steps that will be executed on build
+        steps:
+                # Sets the go workspace and places you package
+                # at the right place in the workspace tree
+                - setup-go-workspace
+                        package-dir:github.com/bobwongvouse/pipelineTest
 
-    # Gets the dependencies
-    - script:
-        name: go get
-        code: |
-          cd $WERCKER_SOURCE_DIR
-          go version
-          go get ./...
+                  # Gets the dependencies
+                - script:
+                        name: go get
+                        code: |
+                                cd $WERCKER_SOURCE_DIR
+                                go version
+                                go get -u github.com/Masterminds/glide
+                                export PATH=$WERCKER_SOURCE_DIR/bin:$PATH
+                                glide install
 
-    # Build the project
-    - script:
-        name: go build
-        code: |
-          go build ./...
+                - internal/watch:
+                        code: go run main.go
+                        reload: true
 
-    # Test the project
-    - script:
-        name: go test
-        code: |
-          go test ./...
+                        # Build the project
+                - script:
+                        name: go build
+                        code: |
+                                go build ./...
+
+                                # Test the project
+                - script:
+                        name: go test
+                        code: |
+                                go test ./...
