@@ -27,11 +27,11 @@ deploy:
   steps: 
     - 
       internal/docker-push: 
-        cmd: /pipeline/source/hello
+        cmd: /pipeline/source/main
         password: $DOCKER_PASSWORD
         port: "8080"
         registry: "https://registry.hub.docker.com"
-        repository: bobwongvouse/pipelineTest
+        repository: tspeech/testpipeline
         tag: latest
         username: $DOCKER_USERNAME
     - 
